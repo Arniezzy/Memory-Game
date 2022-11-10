@@ -1,4 +1,4 @@
-//all cards 
+// Flipping cards
 var cards = document.querySelectorAll(".memory-card");
 
 //each card
@@ -80,8 +80,9 @@ const fetchCats = () => {
 fetchCats();
 
 function flipCard() {
-    console.log(flipCard);
-    this.classList.toggle('flip');
+    this.classList.add('flip');
 }
 
 cards.forEach(card => card.addEventListener('click',flipCard));
+
+// 
