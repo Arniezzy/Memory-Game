@@ -4,8 +4,16 @@ var card1 = document.querySelector('#card1');
 var card2 = document.querySelector('#card2');
 var card3 = document.querySelector('#card3');
 var card4 = document.querySelector('#card4');
+var card5 = document.querySelector('#card5');
+var card6 = document.querySelector('#card6');
+var card7 = document.querySelector('#card7');
+var card8 = document.querySelector('#card8');
+var card9 = document.querySelector('#card9');
+var card10 = document.querySelector('#card10');
+var card11 = document.querySelector('#card11');
+var card12 = document.querySelector('#card12');
 //set array as the card assignments
-var cardArr = [card1,card2,card3,card4];
+var cardArr = [card1,card2,card3,card4,card5,card6,card7,card8,card9,card10,card11,card12];
 
 //Shuffle Image Assignments
 //Fisher-Yates Shuffle 
@@ -26,20 +34,23 @@ function shuffle(array){
         
         cardArr = array;
     }
-    
-    //Random Pokemon Image
-    //905 possible choices
-    const fetchPokemon = () => {
-        const promises = [];
-        //set i<=# to the number of needed choices
-        for (let i = 1; i <= 2; i++) {
-            const x = Math.floor(Math.random() * 906);
-            const url = `https://pokeapi.co/api/v2/pokemon/${x}`;
-            promises.push(fetch(url).then((res) => res.json()));
-        }
-        Promise.all(promises).then((results) => {
-            const pokemon = results.map((result) => ({
-                image: result.sprites['front_default'],
+  
+//     cardArr = array;
+// }
+
+//Random Pokemon Image
+//905 possible choices
+const fetchPokemon = () => {
+    const promises = [];
+    //set i<=# to the number of needed choices
+    for (let i = 1; i <= 6; i++) {
+        const x = Math.floor(Math.random() * 906);
+        const url = `https://pokeapi.co/api/v2/pokemon/${x}`;
+        promises.push(fetch(url).then((res) => res.json()));
+    }
+    Promise.all(promises).then((results) => {
+        const pokemon = results.map((result) => ({
+            image: result.sprites['front_default'],
         }));
         //randomize order of card assignments
         shuffle(cardArr);
@@ -73,10 +84,11 @@ const fetchCats = () => {
     const url = `https://api.thecatapi.com/v1/images/search?limit=6`;
     promises.push(fetch(url).then((res) => res.json()));
     Promise.all(promises).then((results) => {
+        console.log(results);
         var cats = [];
         //set Cats array to be only the images
         //change i<=# to be the number of how many images are necessary for the game 
-        for (let i = 1; i <= 2; i++){
+        for (let i = 0; i <= 5; i++){
             cats.push(results[0][i]['url'])
         };
         //randomize order of card assignments
