@@ -6,8 +6,16 @@ var card1 = document.querySelector('#card1');
 var card2 = document.querySelector('#card2');
 var card3 = document.querySelector('#card3');
 var card4 = document.querySelector('#card4');
+var card5 = document.querySelector('#card5');
+var card6 = document.querySelector('#card6');
+var card7 = document.querySelector('#card7');
+var card8 = document.querySelector('#card8');
+var card9 = document.querySelector('#card9');
+var card10 = document.querySelector('#card10');
+var card11 = document.querySelector('#card11');
+var card12 = document.querySelector('#card12');
 //set array as the card assignments
-var cardArr = [card1,card2,card3,card4];
+var cardArr = [card1,card2,card3,card4,card5,card6,card7,card8,card9,card10,card11,card12];
 
 //Shuffle Image Assignments
 //Fisher-Yates Shuffle 
@@ -34,7 +42,7 @@ function shuffle(array){
 const fetchPokemon = () => {
     const promises = [];
     //set i<=# to the number of needed choices
-    for (let i = 1; i <= 2; i++) {
+    for (let i = 1; i <= 6; i++) {
         const x = Math.floor(Math.random() * 906);
         const url = `https://pokeapi.co/api/v2/pokemon/${x}`;
         promises.push(fetch(url).then((res) => res.json()));
@@ -50,6 +58,14 @@ const fetchPokemon = () => {
         cardArr[1].src = pokemon[0].image;
         cardArr[2].src = pokemon[1].image;
         cardArr[3].src = pokemon[1].image;
+        cardArr[4].src = pokemon[2].image;
+        cardArr[5].src = pokemon[2].image;
+        cardArr[6].src = pokemon[3].image;
+        cardArr[7].src = pokemon[3].image;
+        cardArr[8].src = pokemon[4].image;
+        cardArr[9].src = pokemon[4].image;
+        cardArr[10].src = pokemon[5].image;
+        cardArr[11].src = pokemon[5].image;
     });
 };
 fetchPokemon();
@@ -62,10 +78,11 @@ const fetchCats = () => {
         const url = `https://api.thecatapi.com/v1/images/search?limit=6`;
         promises.push(fetch(url).then((res) => res.json()));
     Promise.all(promises).then((results) => {
+        console.log(results);
         var cats = [];
         //set Cats array to be only the images
         //change i<=# to be the number of how many images are necessary for the game 
-        for (let i = 1; i <= 2; i++){
+        for (let i = 0; i <= 5; i++){
             cats.push(results[0][i]['url'])
         };
         //randomize order of card assignments
@@ -75,6 +92,14 @@ const fetchCats = () => {
         cardArr[1].src = cats[0];
         cardArr[2].src = cats[1];
         cardArr[3].src = cats[1];
+        cardArr[4].src = cats[2];
+        cardArr[5].src = cats[2];
+        cardArr[6].src = cats[3];
+        cardArr[7].src = cats[3];
+        cardArr[8].src = cats[4];
+        cardArr[9].src = cats[4];
+        cardArr[10].src = cats[5];
+        cardArr[11].src = cats[5];
     });
 };
 fetchCats();
