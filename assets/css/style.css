@@ -37,7 +37,7 @@ body {
 
 .memory-card:active {
     transform: scale(.95);
-    transition: transform .2s;
+    transition: transform .6s;
   }
 
 .memory-card.flip {
