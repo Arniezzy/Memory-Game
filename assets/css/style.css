@@ -8,6 +8,7 @@
 body {
     background: #f1c40f;
     display: flex;
+    flex-direction: column;
   }
   
 /* game board */
@@ -19,10 +20,16 @@ body {
     width: 640px;
     height: 640px;
     margin: auto;
-    display: flex;
+    /* display: flex; */
     flex-wrap: wrap;
     perspective: 1000px;
   }
+
+score board
+.scoreboard {
+  flex-direction: column;
+}
+
 /* Cards */
 .memory-card {
   position: relative;
