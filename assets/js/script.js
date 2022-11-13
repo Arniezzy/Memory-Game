@@ -1,4 +1,3 @@
-
 //each card
 var card1 = document.querySelector('#card1');
 var card2 = document.querySelector('#card2');
@@ -14,6 +13,39 @@ var card11 = document.querySelector('#card11');
 var card12 = document.querySelector('#card12');
 //set array as the card assignments
 var cardArr = [card1,card2,card3,card4,card5,card6,card7,card8,card9,card10,card11,card12];
+
+//card flip counter
+const state = {
+    flippedCards: 0,
+    totalFlips: 0,
+}
+
+//winning condition variables
+const selectors = {
+    gameBoard: document.querySelector('.game-board'),
+    yourScore: document.querySelector('.your-score'),
+    highScore: document.querySelector('.high-score'),
+    memoryGame: document.querySelector('.memory-game')
+}
+
+//display totalFlips as Score
+selectors.yourScore.innerHTML = `<span> Score: ${state.totalFlips}</span> moves`
+
+//set starting condition for 'play again' 
+//when the game is won, the display turns to 'none
+selectors.memoryGame.style.display = 'flex';
+
+
+//high score from local storage
+var highScore = localStorage.getItem("highScore");
+console.log(highScore);
+
+if (highScore!=null){
+    selectors.highScore.innerHTML = `<span> Score: ${highScore}</span> moves`
+}
+else{
+    selectors.highScore.innerHTML = `<span>Best Score: none </span>`
+};
 
 //Shuffle Image Assignments
 //Fisher-Yates Shuffle 
@@ -34,9 +66,6 @@ function shuffle(array){
         
         cardArr = array;
     }
-  
-//     cardArr = array;
-// }
 
 //Random Pokemon Image
 //905 possible choices
@@ -59,6 +88,14 @@ const fetchPokemon = () => {
         cardArr[1].src = pokemon[0].image;
         cardArr[2].src = pokemon[1].image;
         cardArr[3].src = pokemon[1].image;
+        cardArr[4].src = pokemon[2].image;
+        cardArr[5].src = pokemon[2].image;
+        cardArr[6].src = pokemon[3].image;
+        cardArr[7].src = pokemon[3].image;
+        cardArr[8].src = pokemon[4].image;
+        cardArr[9].src = pokemon[4].image;
+        cardArr[10].src = pokemon[5].image;
+        cardArr[11].src = pokemon[5].image;
 
         cardArr[0].parentElement.setAttribute('data-framework', 'pikachu');
         cardArr[1].parentElement.setAttribute('data-framework', 'pikachu');
@@ -84,7 +121,6 @@ const fetchCats = () => {
     const url = `https://api.thecatapi.com/v1/images/search?limit=6`;
     promises.push(fetch(url).then((res) => res.json()));
     Promise.all(promises).then((results) => {
-        console.log(results);
         var cats = [];
         //set Cats array to be only the images
         //change i<=# to be the number of how many images are necessary for the game 
@@ -98,6 +134,14 @@ const fetchCats = () => {
         cardArr[1].src = cats[0];
         cardArr[2].src = cats[1];
         cardArr[3].src = cats[1];
+        cardArr[4].src = cats[2];
+        cardArr[5].src = cats[2];
+        cardArr[6].src = cats[3];
+        cardArr[7].src = cats[3];
+        cardArr[8].src = cats[4];
+        cardArr[9].src = cats[4];
+        cardArr[10].src = cats[5];
+        cardArr[11].src = cats[5];
 
         cardArr[0].parentElement.setAttribute('data-framework', 'pikachu');
         cardArr[1].parentElement.setAttribute('data-framework', 'pikachu');
@@ -123,6 +167,14 @@ var lockBoard = false;
 var firstCard, secondCard;
 
 function flipCard() {
+    //count the number of currently flipped cards
+    state.flippedCards++
+    //count the number of total card flips
+    state.totalFlips++
+
+    //display totalFlips as Score
+        selectors.yourScore.innerHTML = `<span> Score: ${state.totalFlips}</span> moves`
+
     if (lockBoard) return;
     if (this === firstCard) return;
 
@@ -136,6 +188,29 @@ function flipCard() {
     }
 
     secondCard = this;
+
+    //check for winning conditions
+    if (!document.querySelectorAll('.memory-card:not(.flip)').length) {
+        setTimeout(() => {
+            selectors.gameBoard.classList.add('done')
+            selectors.memoryGame.style.display = 'none'
+            selectors.yourScore.innerHTML = `
+                <span class="win-text">
+                    You won!<br />
+                    with <span class="highlight">${state.totalFlips}</span> moves
+            `
+                    //set highscore to local storage
+                    if (highScore!=null){
+                        //check if high score or your score is lower
+                        if(highScore>yourScore){
+                            localStorage.setItem("highScore", state.totalFlips);
+                        }
+                    }
+                    else{
+                        localStorage.setItem("highScore", state.totalFlips);
+                    };
+        }, 1000)
+    }
     checkForMatch();
 }
 
