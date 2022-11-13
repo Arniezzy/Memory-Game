@@ -22,6 +22,21 @@ const state = {
 
 //winning condition variables
 const selectors = {
+    welcomeStart: document.querySelector('.game'),
+    themeSelector: document.querySelector('.theme'),
+    gameBoard: document.querySelector('.game-board'),
+    yourScore: document.querySelector('.your-score'),
+    highScore: document.querySelector('.high-score'),
+    memoryGame: document.querySelector('.memory-game'),
+    scoreBoard: document.querySelector('.scoreboard')  
+}
+
+//set starting screen
+selectors.themeSelector.style.display = 'none'
+selectors.memoryGame.style.display = 'none'
+selectors.scoreBoard.style.display = 'none'
+
+=======
     gameBoard: document.querySelector('.game-board'),
     yourScore: document.querySelector('.your-score'),
     highScore: document.querySelector('.high-score'),
@@ -33,6 +48,17 @@ selectors.yourScore.innerHTML = `<span> Score: ${state.totalFlips}</span> moves`
 
 //set starting condition for 'play again' 
 //when the game is won, the display turns to 'none
+//selectors.memoryGame.style.display = 'flex';
+
+//high score from local storage
+var highScore = localStorage.getItem("highScore");
+
+if (highScore!=null){
+    selectors.highScore.innerHTML = `<span>  Score: ${highScore}</span> moves`
+}
+else{
+    selectors.highScore.innerHTML = `<span> Best Score: none </span>`
+=======
 selectors.memoryGame.style.display = 'flex';
 
 
@@ -110,8 +136,10 @@ const fetchPokemon = () => {
         cardArr[10].parentElement.setAttribute('data-framework', 'mew');
         cardArr[11].parentElement.setAttribute('data-framework', 'mew');
     });
+    selectors.memoryGame.style.display = 'flex'
+    selectors.scoreBoard.style.display = 'flex'
+    selectors.themeSelector.style.display = 'none'
 };
-fetchPokemon();
 
 
 //Random Cat Image
@@ -156,8 +184,10 @@ const fetchCats = () => {
         cardArr[10].parentElement.setAttribute('data-framework', 'mew');
         cardArr[11].parentElement.setAttribute('data-framework', 'mew');
     });
+    selectors.memoryGame.style.display = 'flex'
+    selectors.scoreBoard.style.display = 'flex'
+    selectors.themeSelector.style.display = 'none'
 };
-fetchCats();
 
 // Flipping cards
 const cards = document.querySelectorAll(".memory-card");
@@ -210,6 +240,8 @@ function flipCard() {
                         localStorage.setItem("highScore", state.totalFlips);
                     };
         }, 1000)
+
+=======
     }
     checkForMatch();
 }
@@ -242,3 +274,35 @@ function resetBoard() {
 }
 
 cards.forEach(card => card.addEventListener('click',flipCard));
+
+//function for theme form submission 
+function handleFormSubmit(event) {
+    // Prevent the default behavior
+    event.preventDefault();
+
+    //Selected option
+    var selected = document.getElementById('theme-options').value;
+    console.log(selected);  
+    console.log(typeof(selected)); 
+    //Call the API based on selected theme
+    if (selected == 'pokemon'){
+        console.log("run pokemon");
+        fetchPokemon();
+    }  
+    else if(selected == 'cats') {
+        console.log("run cats");
+        fetchCats();
+    }
+  }
+
+function startGame(){
+    selectors.themeSelector.style.display = 'flex'
+    selectors.welcomeStart.style.display = 'none'
+};
+
+
+//form input for theme
+formE1.on('submit', handleFormSubmit);
+
+//start button event listener
+startButton.addEventListener("click", startGame )

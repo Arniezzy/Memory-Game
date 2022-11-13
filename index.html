@@ -13,22 +13,41 @@
 <body>
     <!-- Welcome message header -->
     <header>
-        <h1>Pokemon Memory Game</h1>
+        <h1>Memory Game</h1>
     </header>
     <!-- First page -->
     <div class="game">
         <div class="welcome">
-            <button>Start</button>
-            <div class="rules"></div>
+            <p><h2>Welcome to our Memory Match Card Game</h2></p>
+            <div class="rules">
+                <p>The game starts with all the cards face down <br>
+                    Select two cards to turn over and reveal the picture <br>
+                     If the two cards have different pictures, the cards will turn back face down <br>
+                        If the two cards have the same picture, the cards will remain face up <br>
+                            When all cards are face up, the game is won <br>
+                                Your score is calculated by the total number of click on the cards until the game is won</p>
+            </div>
+            <button id = 'start'>Start</button>
         </div>
     </div>
     <!-- Theme selection screen -->
     <section class="theme">
-        <div>
-            <button>Go</button>
-        </div>
+        <form id = "theme-form">
+                <legend>Select a theme: </legend>
+                <select id="theme-options" name="theme-options">
+                    <option value="pokemon">Pokemon</option>
+                    <option value="cats">Cats</option>
+                </select> 
+                <input type="submit">
+        </form>
     </section>
-
+    <!-- Highscore -->
+    <section class="scoreboard">
+        <div class="your-score"></div>
+        <div class="high-score"></div>
+        <button id = 'play-again'>Play again?</button>
+    </section>
+</section>
     <!-- Cards area -->
 <section class = "game-board">
     <section class="memory-game">
@@ -83,6 +102,10 @@
             <img class="back-face" src="./assets/images/Backcard.png" alt="Back">
         </div>
     </section>
+</section>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script type = 'text/javascript' src="./assets/js/script.js"></script>
+=======
     <!-- Highscore -->
     <section class="highscore">
         <div class="your-score"></div>
