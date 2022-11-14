@@ -96,18 +96,18 @@ const fetchPokemon = () => {
         //randomize order of card assignments
         shuffle(cardArr);
         //set Pokemon images as card front-face
-        cardArr[0].src = pokemon[0].image;
-        cardArr[1].src = pokemon[0].image;
-        cardArr[2].src = pokemon[1].image;
-        cardArr[3].src = pokemon[1].image;
-        cardArr[4].src = pokemon[2].image;
-        cardArr[5].src = pokemon[2].image;
-        cardArr[6].src = pokemon[3].image;
-        cardArr[7].src = pokemon[3].image;
-        cardArr[8].src = pokemon[4].image;
-        cardArr[9].src = pokemon[4].image;
-        cardArr[10].src = pokemon[5].image;
-        cardArr[11].src = pokemon[5].image;
+        cardArr[0].style.backgroundImage = "url('"+pokemon[0].image +"')";
+        cardArr[1].style.backgroundImage = "url('"+pokemon[0].image +"')";
+        cardArr[2].style.backgroundImage = "url('"+pokemon[1].image +"')";
+        cardArr[3].style.backgroundImage = "url('"+pokemon[1].image +"')";
+        cardArr[4].style.backgroundImage = "url('"+pokemon[2].image +"')";
+        cardArr[5].style.backgroundImage = "url('"+pokemon[2].image +"')";
+        cardArr[6].style.backgroundImage = "url('"+pokemon[3].image +"')";
+        cardArr[7].style.backgroundImage = "url('"+pokemon[3].image +"')";
+        cardArr[8].style.backgroundImage = "url('"+pokemon[4].image +"')";
+        cardArr[9].style.backgroundImage = "url('"+pokemon[4].image +"')";
+        cardArr[10].style.backgroundImage = "url('"+pokemon[5].image +"')";
+        cardArr[11].style.backgroundImage = "url('"+pokemon[5].image +"')";
 
         cardArr[0].parentElement.setAttribute('data-framework', 'pikachu');
         cardArr[1].parentElement.setAttribute('data-framework', 'pikachu');
@@ -145,18 +145,18 @@ const fetchCats = () => {
         //randomize order of card assignments
         shuffle(cardArr);
         //set Cat images as card front-face
-        cardArr[0].src = cats[0];
-        cardArr[1].src = cats[0];
-        cardArr[2].src = cats[1];
-        cardArr[3].src = cats[1];
-        cardArr[4].src = cats[2];
-        cardArr[5].src = cats[2];
-        cardArr[6].src = cats[3];
-        cardArr[7].src = cats[3];
-        cardArr[8].src = cats[4];
-        cardArr[9].src = cats[4];
-        cardArr[10].src = cats[5];
-        cardArr[11].src = cats[5];
+        cardArr[0].style.backgroundImage = "url('"+cats[0] +"')";
+        cardArr[1].style.backgroundImage = "url('"+cats[0] +"')";
+        cardArr[2].style.backgroundImage = "url('"+cats[1] +"')";
+        cardArr[3].style.backgroundImage = "url('"+cats[1] +"')";
+        cardArr[4].style.backgroundImage = "url('"+cats[2] +"')";
+        cardArr[5].style.backgroundImage = "url('"+cats[2] +"')";
+        cardArr[6].style.backgroundImage = "url('"+cats[3] +"')";
+        cardArr[7].style.backgroundImage = "url('"+cats[3] +"')";
+        cardArr[8].style.backgroundImage = "url('"+cats[4] +"')";
+        cardArr[9].style.backgroundImage = "url('"+cats[4] +"')";
+        cardArr[10].style.backgroundImage = "url('"+cats[5] +"')";
+        cardArr[11].style.backgroundImage = "url('"+cats[5] +"')";
 
         cardArr[0].parentElement.setAttribute('data-framework', 'pikachu');
         cardArr[1].parentElement.setAttribute('data-framework', 'pikachu');
