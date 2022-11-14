@@ -1,3 +1,9 @@
+//define the buttons 
+var startButton = document.querySelector('#start');
+var playAgainButton = document.querySelectorAll('#play-again');
+//define form input on html
+var formE1 = $('#theme-form');
+
 //each card
 var card1 = document.querySelector('#card1');
 var card2 = document.querySelector('#card2');
@@ -36,13 +42,6 @@ selectors.themeSelector.style.display = 'none'
 selectors.memoryGame.style.display = 'none'
 selectors.scoreBoard.style.display = 'none'
 
-=======
-    gameBoard: document.querySelector('.game-board'),
-    yourScore: document.querySelector('.your-score'),
-    highScore: document.querySelector('.high-score'),
-    memoryGame: document.querySelector('.memory-game')
-}
-
 //display totalFlips as Score
 selectors.yourScore.innerHTML = `<span> Score: ${state.totalFlips}</span> moves`
 
@@ -58,19 +57,6 @@ if (highScore!=null){
 }
 else{
     selectors.highScore.innerHTML = `<span> Best Score: none </span>`
-=======
-selectors.memoryGame.style.display = 'flex';
-
-
-//high score from local storage
-var highScore = localStorage.getItem("highScore");
-console.log(highScore);
-
-if (highScore!=null){
-    selectors.highScore.innerHTML = `<span> Score: ${highScore}</span> moves`
-}
-else{
-    selectors.highScore.innerHTML = `<span>Best Score: none </span>`
 };
 
 //Shuffle Image Assignments
@@ -138,6 +124,7 @@ const fetchPokemon = () => {
     });
     selectors.memoryGame.style.display = 'flex'
     selectors.scoreBoard.style.display = 'flex'
+    selectors.scoreBoard.style.flexDirection= 'column'
     selectors.themeSelector.style.display = 'none'
 };
 
@@ -241,7 +228,6 @@ function flipCard() {
                     };
         }, 1000)
 
-=======
     }
     checkForMatch();
 }
