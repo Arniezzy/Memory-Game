@@ -1,3 +1,8 @@
+//define the buttons 
+var startButton = document.querySelector('#start');
+var playAgainButton = document.querySelectorAll('#play-again');
+//define form input on html
+var formE1 = $('#theme-form');
 
 //each card
 var card1 = document.querySelector('#card1');
@@ -14,6 +19,45 @@ var card11 = document.querySelector('#card11');
 var card12 = document.querySelector('#card12');
 //set array as the card assignments
 var cardArr = [card1,card2,card3,card4,card5,card6,card7,card8,card9,card10,card11,card12];
+
+//card flip counter
+const state = {
+    flippedCards: 0,
+    totalFlips: 0,
+}
+
+//winning condition variables
+const selectors = {
+    welcomeStart: document.querySelector('.game'),
+    themeSelector: document.querySelector('.theme'),
+    gameBoard: document.querySelector('.game-board'),
+    yourScore: document.querySelector('.your-score'),
+    highScore: document.querySelector('.high-score'),
+    memoryGame: document.querySelector('.memory-game'),
+    scoreBoard: document.querySelector('.scoreboard')  
+}
+
+//set starting screen
+selectors.themeSelector.style.display = 'none'
+selectors.memoryGame.style.display = 'none'
+selectors.scoreBoard.style.display = 'none'
+
+//display totalFlips as Score
+selectors.yourScore.innerHTML = `<span> Score: ${state.totalFlips}</span> moves`
+
+//set starting condition for 'play again' 
+//when the game is won, the display turns to 'none
+//selectors.memoryGame.style.display = 'flex';
+
+//high score from local storage
+var highScore = localStorage.getItem("highScore");
+
+if (highScore!=null){
+    selectors.highScore.innerHTML = `<span>  Score: ${highScore}</span> moves`
+}
+else{
+    selectors.highScore.innerHTML = `<span> Best Score: none </span>`
+};
 
 //Shuffle Image Assignments
 //Fisher-Yates Shuffle 
@@ -34,9 +78,6 @@ function shuffle(array){
         
         cardArr = array;
     }
-  
-//     cardArr = array;
-// }
 
 //Random Pokemon Image
 //905 possible choices
@@ -81,8 +122,11 @@ const fetchPokemon = () => {
         cardArr[10].parentElement.setAttribute('data-framework', 'mew');
         cardArr[11].parentElement.setAttribute('data-framework', 'mew');
     });
+    selectors.memoryGame.style.display = 'flex'
+    selectors.scoreBoard.style.display = 'flex'
+    selectors.scoreBoard.style.flexDirection= 'column'
+    selectors.themeSelector.style.display = 'none'
 };
-fetchPokemon();
 
 
 //Random Cat Image
@@ -92,7 +136,6 @@ const fetchCats = () => {
     const url = `https://api.thecatapi.com/v1/images/search?limit=6`;
     promises.push(fetch(url).then((res) => res.json()));
     Promise.all(promises).then((results) => {
-        console.log(results);
         var cats = [];
         //set Cats array to be only the images
         //change i<=# to be the number of how many images are necessary for the game 
@@ -128,8 +171,10 @@ const fetchCats = () => {
         cardArr[10].parentElement.setAttribute('data-framework', 'mew');
         cardArr[11].parentElement.setAttribute('data-framework', 'mew');
     });
+    selectors.memoryGame.style.display = 'flex'
+    selectors.scoreBoard.style.display = 'flex'
+    selectors.themeSelector.style.display = 'none'
 };
-fetchCats();
 
 // Flipping cards
 const cards = document.querySelectorAll(".memory-card");
@@ -139,6 +184,14 @@ var lockBoard = false;
 var firstCard, secondCard;
 
 function flipCard() {
+    //count the number of currently flipped cards
+    state.flippedCards++
+    //count the number of total card flips
+    state.totalFlips++
+
+    //display totalFlips as Score
+        selectors.yourScore.innerHTML = `<span> Score: ${state.totalFlips}</span> moves`
+
     if (lockBoard) return;
     if (this === firstCard) return;
 
@@ -152,6 +205,30 @@ function flipCard() {
     }
 
     secondCard = this;
+
+    //check for winning conditions
+    if (!document.querySelectorAll('.memory-card:not(.flip)').length) {
+        setTimeout(() => {
+            selectors.gameBoard.classList.add('done')
+            selectors.memoryGame.style.display = 'none'
+            selectors.yourScore.innerHTML = `
+                <span class="win-text">
+                    You won!<br />
+                    with <span class="highlight">${state.totalFlips}</span> moves
+            `
+                    //set highscore to local storage
+                    if (highScore!=null){
+                        //check if high score or your score is lower
+                        if(highScore>yourScore){
+                            localStorage.setItem("highScore", state.totalFlips);
+                        }
+                    }
+                    else{
+                        localStorage.setItem("highScore", state.totalFlips);
+                    };
+        }, 1000)
+
+    }
     checkForMatch();
 }
 
@@ -181,5 +258,36 @@ function resetBoard() {
     [hasFlippedCard, lockBoard] = [false, false];
     [firstCard, secondCard] = [null, null];
 }
-
 cards.forEach(card => card.addEventListener('click',flipCard));
+
+//function for theme form submission 
+function handleFormSubmit(event) {
+    // Prevent the default behavior
+    event.preventDefault();
+
+    //Selected option
+    var selected = document.getElementById('theme-options').value;
+    console.log(selected);  
+    console.log(typeof(selected)); 
+    //Call the API based on selected theme
+    if (selected == 'pokemon'){
+        console.log("run pokemon");
+        fetchPokemon();
+    }  
+    else if(selected == 'cats') {
+        console.log("run cats");
+        fetchCats();
+    }
+  }
+
+function startGame(){
+    selectors.themeSelector.style.display = 'flex'
+    selectors.welcomeStart.style.display = 'none'
+};
+
+
+//form input for theme
+formE1.on('submit', handleFormSubmit);
+
+//start button event listener
+startButton.addEventListener("click", startGame )
