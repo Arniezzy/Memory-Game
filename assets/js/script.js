@@ -59,6 +59,14 @@ const fetchPokemon = () => {
         cardArr[1].src = pokemon[0].image;
         cardArr[2].src = pokemon[1].image;
         cardArr[3].src = pokemon[1].image;
+        cardArr[4].src = pokemon[2].image;
+        cardArr[5].src = pokemon[2].image;
+        cardArr[6].src = pokemon[3].image;
+        cardArr[7].src = pokemon[3].image;
+        cardArr[8].src = pokemon[4].image;
+        cardArr[9].src = pokemon[4].image;
+        cardArr[10].src = pokemon[5].image;
+        cardArr[11].src = pokemon[5].image;
 
         cardArr[0].parentElement.setAttribute('data-framework', 'pikachu');
         cardArr[1].parentElement.setAttribute('data-framework', 'pikachu');
@@ -98,6 +106,14 @@ const fetchCats = () => {
         cardArr[1].src = cats[0];
         cardArr[2].src = cats[1];
         cardArr[3].src = cats[1];
+        cardArr[4].src = cats[2];
+        cardArr[5].src = cats[2];
+        cardArr[6].src = cats[3];
+        cardArr[7].src = cats[3];
+        cardArr[8].src = cats[4];
+        cardArr[9].src = cats[4];
+        cardArr[10].src = cats[5];
+        cardArr[11].src = cats[5];
 
         cardArr[0].parentElement.setAttribute('data-framework', 'pikachu');
         cardArr[1].parentElement.setAttribute('data-framework', 'pikachu');
