@@ -2,7 +2,7 @@
 Group Project #1
 
 ## Description
-This project was created to recreate a common childhood game were the game starts with the cards faced down and are revealed when two are selected. If the two cards are not matching, they will turn ack face down, but if there is a match the cards will remain faced up. You won the game when all cards are facing up and the score is calculated by the total number of clicks.
+This project was created to recreate a common childhood game were the game starts with the cards faced down and are revealed when two are selected. If the two cards are not matching, they will turn back face down, but if there is a match the cards will remain faced up. You won the game when all cards are facing up and the score is calculated by the total number of clicks.
 
 ## How to play
 End user opens the website and is presented with the welcome page with the instructions and the user clicks start game.
